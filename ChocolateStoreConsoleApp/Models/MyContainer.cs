@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using ChocolateStoreConsoleApp.Repositorys;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 
 namespace ChocolateStoreConsoleApp.Models
@@ -7,14 +8,15 @@ namespace ChocolateStoreConsoleApp.Models
     {
         public static IServiceProvider provider;
 
-        public static IServiceProvider Initialize()
+        public static void Initialize()
         {
             IServiceCollection services = new ServiceCollection();
 
             services.AddSingleton<SalesContext>();
+            services.AddSingleton<IItemsDBRepository, ItemDBRepository>();
+            services.AddSingleton<ISalesDBRepository, SalesDBRepository>();
 
             provider = services.BuildServiceProvider();
-            return provider;
         }
     }
 }

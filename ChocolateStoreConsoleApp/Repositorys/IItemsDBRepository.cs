@@ -2,7 +2,7 @@
 
 namespace ChocolateStoreConsoleApp.Repositorys
 {
-    public interface IItemDBRepository
+    public interface IItemsDBRepository
     {
         void Add(Item item);
         Item Find(int id);

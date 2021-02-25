@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace ChocolateStoreConsoleApp.Repositorys
 {
-    public class ItemDBRepository : IItemDBRepository
+    public class ItemDBRepository : IItemsDBRepository
     {
         private SalesContext context;
         public ItemDBRepository(SalesContext context)
