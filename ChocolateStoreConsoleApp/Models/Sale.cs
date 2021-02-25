@@ -14,9 +14,10 @@ namespace ChocolateStoreConsoleApp.Models
         public DateTime SaleDate { get; set; }
         public virtual List<Item> Items { get; set; } //заставить быть не пустым
 
-        public Sale()
+        public Sale(List<Item> Items)
         {
-            Items = new List<Item>();
+            SaleDate = DateTime.Now;
+            this.Items = Items;
         }
     }
 }
