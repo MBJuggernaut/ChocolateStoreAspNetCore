@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ChocolateStoreConsoleApp.Models;
+using System;
+using System.Linq;
 
 namespace ChocolateStoreConsoleApp
 {
@@ -6,7 +8,13 @@ namespace ChocolateStoreConsoleApp
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            SalesContext context = new SalesContext();
+
+            string s = context.Items.FirstOrDefault(x=>x.Id==1).Name;
+            string s2 = context.Items.FirstOrDefault(x => x.Id == 2).Name;
+            Console.WriteLine(s);
+            Console.WriteLine(s2);
+
         }
     }
 }
