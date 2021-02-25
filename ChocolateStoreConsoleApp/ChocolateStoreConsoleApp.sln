@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30907.101
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChocolateStoreConsoleApp", "ChocolateStoreConsoleApp.csproj", "{DE283941-964A-4B3D-AD59-16ACFF151F0F}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DE283941-964A-4B3D-AD59-16ACFF151F0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DE283941-964A-4B3D-AD59-16ACFF151F0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DE283941-964A-4B3D-AD59-16ACFF151F0F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DE283941-964A-4B3D-AD59-16ACFF151F0F}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D1C1E80E-657B-47E6-ADD1-9414FA82B958}
+	EndGlobalSection
+EndGlobal
