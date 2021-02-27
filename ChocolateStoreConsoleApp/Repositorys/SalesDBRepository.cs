@@ -19,6 +19,7 @@ namespace ChocolateStoreConsoleApp.Repositorys
                 context.Sales.Add(sale);
                 context.SaveChanges();
             }
+            else throw new Exception("Not valid data");
         }
         public void Delete(int id)
         {
@@ -34,20 +35,10 @@ namespace ChocolateStoreConsoleApp.Repositorys
             return context.Sales.FirstOrDefault(t => t.Id == id);
         }
 
-        public void Update(Sale sale, int id)
-        {
-        //    if (IsValid(sale))
-        //    {
-        //        var saleToUpdate = Find(id);
-        //        if (saleToUpdate != null)
-        //        {
-                    
-        //        }
-        //    }
-        }
+
         private bool IsValid(Sale sale)
         {
-            return MyValidator.Validate(sale).Count == 0 && sale != null;
+            return sale != null && sale.Items.Count > 0 && MyValidator.Validate(sale).Count == 0;
         }
     }
 }

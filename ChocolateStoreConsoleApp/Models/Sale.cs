@@ -12,12 +12,11 @@ namespace ChocolateStoreConsoleApp.Models
         [Required]
         [Column(TypeName = "datetime2")]
         public DateTime SaleDate { get; set; }
-        public virtual List<Item> Items { get; set; } //заставить быть не пустым
+        public virtual List<Item> Items { get; set; }
 
         public Sale()
         {
-            SaleDate = DateTime.Now;
-           // this.Items = Items;
+            SaleDate = DateTime.Now;           
         }
     }
 }

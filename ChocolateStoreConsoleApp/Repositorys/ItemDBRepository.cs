@@ -18,6 +18,7 @@ namespace ChocolateStoreConsoleApp.Repositorys
                 context.Items.Add(item);
                 context.SaveChanges();
             }
+            else throw new Exception("Not valid data");
         }
 
         public void Delete(int id)
@@ -49,11 +50,12 @@ namespace ChocolateStoreConsoleApp.Repositorys
                     context.SaveChanges();
                 }
             }
+            else throw new Exception("Not valid data");
         }
 
         private bool IsValid(Item item)
         {
-            return MyValidator.Validate(item).Count == 0 && item != null;
+            return item != null&&MyValidator.Validate(item).Count == 0;
         }
     }
 }
