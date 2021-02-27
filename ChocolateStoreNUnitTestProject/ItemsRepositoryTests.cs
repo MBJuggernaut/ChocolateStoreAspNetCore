@@ -1,9 +1,9 @@
-﻿using ChocolateStoreConsoleApp.Models;
-using ChocolateStoreConsoleApp.Repositorys;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using Microsoft.Extensions.DependencyInjection;
 using System.Transactions;
 using System.Linq;
+using ChocolateStoreConsoleApp.Repositorys;
+using ChocolateStoreConsoleApp.Models;
 
 namespace ChocolateStoreNUnitTestProject
 {
@@ -112,6 +112,7 @@ namespace ChocolateStoreNUnitTestProject
 
             //Assert            
             Assert.AreEqual(repository.Find(1).Name, item.Name);
+            Assert.AreEqual(countBefore, countAfter);
         }
 
         [Test]

@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30907.101
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChocolateStoreConsoleApp", "ChocolateStoreConsoleApp.csproj", "{DE283941-964A-4B3D-AD59-16ACFF151F0F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChocolateStoreConsoleApp", "ChocolateStoreConsoleApp.csproj", "{DE283941-964A-4B3D-AD59-16ACFF151F0F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChocolateStoreNUnitTestProject", "..\ChocolateStoreNUnitTestProject\ChocolateStoreNUnitTestProject.csproj", "{9A029CA0-8CFE-4061-9041-1A5BCDF37591}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChocolateStoreNUnitTestProject", "..\ChocolateStoreNUnitTestProject\ChocolateStoreNUnitTestProject.csproj", "{9A029CA0-8CFE-4061-9041-1A5BCDF37591}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChocolateStoreClassLibrary", "..\ChocolateStoreClassLibrary\ChocolateStoreClassLibrary.csproj", "{D999FCFD-1729-4071-BB72-A65277C50A44}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{9A029CA0-8CFE-4061-9041-1A5BCDF37591}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9A029CA0-8CFE-4061-9041-1A5BCDF37591}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9A029CA0-8CFE-4061-9041-1A5BCDF37591}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D999FCFD-1729-4071-BB72-A65277C50A44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D999FCFD-1729-4071-BB72-A65277C50A44}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D999FCFD-1729-4071-BB72-A65277C50A44}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D999FCFD-1729-4071-BB72-A65277C50A44}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
