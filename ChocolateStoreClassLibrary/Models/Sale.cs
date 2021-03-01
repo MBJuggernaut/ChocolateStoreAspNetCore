@@ -11,12 +11,12 @@ namespace ChocolateStoreClassLibrary.Models
         public int Id { get; set; }
         [Required]
         [Column(TypeName = "datetime2")]
-        public DateTime SaleDate { get; set; }
+        public DateTime SaleDate { get; }
         public virtual List<Item> Items { get; set; }
 
         public Sale()
         {
-            SaleDate = DateTime.Now;           
+            SaleDate = DateTime.Now;
         }
     }
 }

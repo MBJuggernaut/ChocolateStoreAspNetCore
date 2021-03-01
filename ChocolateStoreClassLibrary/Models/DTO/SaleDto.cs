@@ -5,9 +5,9 @@
         public int Id { get; set; }
         public string SaleDate { get; set; }
 
-        public static explicit operator SaleDto(Sale v)
+        public static explicit operator SaleDto(Sale sale)
         {
-            return new SaleDto { Id = v.Id, SaleDate = v.SaleDate.ToString("T") };
+            return new SaleDto { Id = sale.Id, SaleDate = sale.SaleDate.ToString("T") };
         }
     }
 }

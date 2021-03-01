@@ -3,7 +3,7 @@ using System.Data.Entity;
 
 namespace ChocolateStoreClassLibrary.Models
 {
-    public class SalesDbInitializer : CreateDatabaseIfNotExists<StoreContext>
+    public class Seeder : CreateDatabaseIfNotExists<StoreContext>
     {
         protected override void Seed(StoreContext context)
         {

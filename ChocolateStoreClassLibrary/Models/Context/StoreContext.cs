@@ -9,7 +9,7 @@ namespace ChocolateStoreClassLibrary.Models
 
         public StoreContext() : base("StoreDB")
         {
-            Database.SetInitializer(new SalesDbInitializer());
+            Database.SetInitializer(new Seeder());
         }
     }
 }

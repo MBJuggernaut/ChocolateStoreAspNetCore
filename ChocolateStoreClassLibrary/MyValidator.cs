@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace ChocolateStoreClassLibrary.Repositorys
+namespace ChocolateStoreClassLibrary
 {
     public static class MyValidator
     {

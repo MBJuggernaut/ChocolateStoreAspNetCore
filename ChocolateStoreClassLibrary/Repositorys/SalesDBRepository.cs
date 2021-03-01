@@ -1,5 +1,6 @@
 ﻿using ChocolateStoreClassLibrary.Models;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace ChocolateStoreClassLibrary.Repositorys
@@ -35,6 +36,17 @@ namespace ChocolateStoreClassLibrary.Repositorys
             return context.Sales.FirstOrDefault(t => t.Id == id);
         }
 
+        public IEnumerable<SaleDto> GetAll()
+        {
+            var allSales = context.Sales.ToList();
+
+            var allSalesAsDto = new List<SaleDto>();
+            foreach (var sale in allSales)
+            {
+                allSalesAsDto.Add((SaleDto)sale);
+            }
+            return allSalesAsDto;
+        }
 
         private bool IsValid(Sale sale)
         {
