@@ -6,8 +6,8 @@ namespace ChocolateStoreClassLibrary.Repositorys
 {
     public class SalesDBRepository : ISalesDBRepository
     {
-        private readonly SalesContext context;
-        public SalesDBRepository(SalesContext context)
+        private readonly StoreContext context;
+        public SalesDBRepository(StoreContext context)
         {
             this.context = context;
         }

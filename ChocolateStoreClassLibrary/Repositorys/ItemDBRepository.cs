@@ -1,13 +1,14 @@
 ﻿using ChocolateStoreClassLibrary.Models;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace ChocolateStoreClassLibrary.Repositorys
 {
     public class ItemDBRepository : IItemsDBRepository
     {
-        private readonly SalesContext context;
-        public ItemDBRepository(SalesContext context)
+        private readonly StoreContext context;
+        public ItemDBRepository(StoreContext context)
         {
             this.context = context;
         }
@@ -45,7 +46,7 @@ namespace ChocolateStoreClassLibrary.Repositorys
                 {
                     itemToUpdate.Name = item.Name;
                     itemToUpdate.Price = item.Price;
-                    itemToUpdate.Sales = item.Sales; //???
+                    itemToUpdate.Sales = item.Sales;
 
                     context.SaveChanges();
                 }
@@ -53,9 +54,14 @@ namespace ChocolateStoreClassLibrary.Repositorys
             else throw new Exception("Not valid data");
         }
 
+        public List<ItemDto> GetAll()
+        {
+            return context.Items.Select(i => (ItemDto)i).ToList();
+        }
+
         private bool IsValid(Item item)
         {
-            return item != null&&MyValidator.Validate(item).Count == 0;
+            return item != null && MyValidator.Validate(item).Count == 0;
         }
     }
 }

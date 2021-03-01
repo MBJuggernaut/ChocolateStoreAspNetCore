@@ -12,7 +12,7 @@ namespace ChocolateStoreClassLibrary.Models
         {
             IServiceCollection services = new ServiceCollection();
 
-            services.AddSingleton<SalesContext>();
+            services.AddSingleton<StoreContext>();
             services.AddSingleton<IItemsDBRepository, ItemDBRepository>();
             services.AddSingleton<ISalesDBRepository, SalesDBRepository>();
 

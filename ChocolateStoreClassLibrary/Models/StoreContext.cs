@@ -2,12 +2,12 @@
 
 namespace ChocolateStoreClassLibrary.Models
 {
-    public class SalesContext : DbContext
+    public class StoreContext : DbContext
     {
         public DbSet<Item> Items { get; set; }
         public DbSet<Sale> Sales { get; set; }
 
-        public SalesContext() : base("SalesDB")
+        public StoreContext() : base("StoreDB")
         {
             Database.SetInitializer(new SalesDbInitializer());
         }
