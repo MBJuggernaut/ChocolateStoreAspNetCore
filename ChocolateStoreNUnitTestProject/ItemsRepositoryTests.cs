@@ -3,6 +3,7 @@ using ChocolateStoreClassLibrary.Repositorys;
 using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Transactions;
 
 namespace ChocolateStoreNUnitTestProject
@@ -16,8 +17,8 @@ namespace ChocolateStoreNUnitTestProject
         public void Setup()
         {
             MyContainer.Initialize();
-            repository = MyContainer.provider.GetService<IItemsDBRepository>();
-            context = MyContainer.provider.GetService<StoreContext>();
+            repository = MyContainer.Provider.GetService<IItemsDBRepository>();
+            context = MyContainer.Provider.GetService<StoreContext>();
 
             transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
         }
@@ -29,13 +30,13 @@ namespace ChocolateStoreNUnitTestProject
         }
 
         [Test]
-        public void Add_CorrectData()
+        public async Task Add_CorrectData()
         {
             //Arrange
             var item = new Item { Name = "Тестовый продукт", Price = 1 };
             //Act
             int countBefore = context.Items.Count();
-            repository.Add(item);
+            await repository.Add(item);
             int countAfter = context.Items.Count();
 
             //Assert            
@@ -43,7 +44,7 @@ namespace ChocolateStoreNUnitTestProject
         }
 
         [Test]
-        public void Add_IncorrectData_NullObject()
+        public async Task Add_IncorrectData_NullObject()
         {
             //Arrange         
             Item item = null;
@@ -51,7 +52,7 @@ namespace ChocolateStoreNUnitTestProject
             //Act
             try
             {
-                repository.Add(item);
+                await repository.Add(item);
             }
             catch
             {
@@ -62,7 +63,7 @@ namespace ChocolateStoreNUnitTestProject
         }
 
         [Test]
-        public void Add_IncorrectData_IncorrectObject()
+        public async Task Add_IncorrectData_IncorrectObject()
         {
             //Arrange
             var item = new Item();
@@ -70,7 +71,7 @@ namespace ChocolateStoreNUnitTestProject
             //Act
             try
             {
-                repository.Add(item);
+                await repository.Add(item);
             }
             catch
             {
@@ -81,50 +82,58 @@ namespace ChocolateStoreNUnitTestProject
         }
 
         [Test]
-        public void Delete()
+        public async Task Delete()
         {
-            //Arrange
-            repository.Delete(1);
+            bool failed = false;
             //Act
-            var sale = repository.Find(1);
+            try
+            {
+                var sale = await repository.Find(1);
+            }
+            catch
+            {
+                failed = true;   
+            }
             //Assert 
-            Assert.IsNull(sale);
+            Assert.IsTrue(failed);
         }
 
         [Test]
-        public void Find()
+        public async Task Find()
         {
-            var sale = repository.Find(1);
+            int id = context.Items.FirstOrDefault(x=>x!=null).Id;
+            var sale = await repository.Find(id);
 
             //Assert 
             Assert.IsNotNull(sale);
         }
 
         [Test]
-        public void Update_CorrectData()
+        public async Task Update_CorrectData()
         {
             //Arrange
             var item = new Item { Name = "Тестовый продукт", Price = 1 };
+            int id = context.Items.FirstOrDefault(x => x != null).Id;
             //Act
             int countBefore = context.Items.Count();
-            repository.Update(item, 1);
+            await repository.Update(item, id);
             int countAfter = context.Items.Count();
-
+            Item item2 = await repository.Find(id);
             //Assert            
-            Assert.AreEqual(repository.Find(1).Name, item.Name);
+            Assert.AreEqual(item2.Name, item.Name);
             Assert.AreEqual(countBefore, countAfter);
         }
 
         [Test]
-        public void Update_IncorrectData_NullObject()
+        public async Task Update_IncorrectData_IncorrectID()
         {
             //Arrange         
-            Item item = null;
+            var item = new Item { Name = "Тестовый продукт", Price = 1 };
             bool failed = false;
             //Act
             try
             {
-                repository.Add(item);
+                await repository.Update(item, -1);
             }
             catch
             {
@@ -135,7 +144,7 @@ namespace ChocolateStoreNUnitTestProject
         }
 
         [Test]
-        public void Update_IncorrectData_IncorrectObject()
+        public async Task Update_IncorrectData_IncorrectObject()
         {
             //Arrange
             var item = new Item();
@@ -143,7 +152,7 @@ namespace ChocolateStoreNUnitTestProject
             //Act
             try
             {
-                repository.Add(item);
+                await repository.Update(item, 1);
             }
             catch
             {

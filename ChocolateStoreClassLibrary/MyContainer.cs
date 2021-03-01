@@ -4,9 +4,21 @@ using System;
 
 namespace ChocolateStoreClassLibrary.Models
 {
-    public static class MyContainer
+    public class MyContainer
     {
-        public static IServiceProvider provider;
+        private static IServiceProvider _provider;
+        public static IServiceProvider Provider
+        {
+            get
+            {
+                if (_provider == null)
+                {
+                    Initialize();
+                }
+
+                return _provider;
+            }
+        }
 
         public static void Initialize()
         {
@@ -16,7 +28,7 @@ namespace ChocolateStoreClassLibrary.Models
             services.AddSingleton<IItemsDBRepository, ItemDBRepository>();
             services.AddSingleton<ISalesDBRepository, SalesDBRepository>();
 
-            provider = services.BuildServiceProvider();
+            _provider = services.BuildServiceProvider();
         }
     }
 }

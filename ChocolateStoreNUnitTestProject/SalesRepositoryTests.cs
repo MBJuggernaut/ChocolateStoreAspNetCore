@@ -1,10 +1,11 @@
-using ChocolateStoreConsoleApp.Models;
-using ChocolateStoreConsoleApp.Repositorys;
-using NUnit.Framework;
+using ChocolateStoreClassLibrary.Models;
+using ChocolateStoreClassLibrary.Repositorys;
 using Microsoft.Extensions.DependencyInjection;
-using System.Transactions;
+using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using System.Transactions;
 
 namespace ChocolateStoreNUnitTestProject
 {
@@ -12,13 +13,13 @@ namespace ChocolateStoreNUnitTestProject
     {
         private TransactionScope transactionScope;
         private ISalesDBRepository repository;
-        private SalesContext context;
+        private StoreContext context;
         [SetUp]
         public void Setup()
         {
             MyContainer.Initialize();
-            repository = MyContainer.provider.GetService<ISalesDBRepository>();
-            context = MyContainer.provider.GetService<SalesContext>();
+            repository = MyContainer.Provider.GetService<ISalesDBRepository>();
+            context = MyContainer.Provider.GetService<StoreContext>();
 
             transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
         }
@@ -30,7 +31,7 @@ namespace ChocolateStoreNUnitTestProject
         }
 
         [Test]
-        public void Add_CorrectData()
+        public async Task Add_CorrectData()
         {
             //Arrange
             var item = new Item { Name = "Тестовый продукт", Price = 1 };
@@ -38,14 +39,14 @@ namespace ChocolateStoreNUnitTestProject
             var sale = new Sale { Items = Items };
             //Act
             int countBefore = context.Sales.Count();
-            repository.Add(sale);
+            await repository.Add(sale);
             int countAfter = context.Sales.Count();
 
             //Assert            
             Assert.AreEqual(countAfter - 1, countBefore);
         }
         [Test]
-        public void Add_IncorrectData_NullObject()
+        public async Task Add_IncorrectData_NullObject()
         {
             //Arrange         
             Sale sale = null;
@@ -53,7 +54,7 @@ namespace ChocolateStoreNUnitTestProject
             //Act
             try
             {
-                repository.Add(sale);
+                await repository.Add(sale);
             }
             catch
             {
@@ -64,7 +65,7 @@ namespace ChocolateStoreNUnitTestProject
 
         }
         [Test]
-        public void Add_IncorrectData_IncorrectObject()
+        public async Task Add_IncorrectData_IncorrectObject()
         {
             //Arrange
             var sale = new Sale();
@@ -72,7 +73,7 @@ namespace ChocolateStoreNUnitTestProject
             //Act
             try
             {
-                repository.Add(sale);
+                await repository.Add(sale);
             }
             catch
             {
@@ -83,20 +84,31 @@ namespace ChocolateStoreNUnitTestProject
         }
 
         [Test]
-        public void Delete()
+        public async Task Delete()
         {
+            int id = context.Sales.FirstOrDefault(x => x != null).Id;
+            bool failed = false;
             //Arrange
-            repository.Delete(1);
+            await repository.Delete(id);
             //Act
-            var sale = repository.Find(1);
+            try
+            {
+                var sale = await repository.Find(id);
+            }
+            catch
+            {
+                failed = true;
+            }
+            
             //Assert 
-            Assert.IsNull(sale);
+            Assert.IsTrue(failed);
         }
 
         [Test]
-        public void Find()
+        public async Task Find()
         {
-            var sale = repository.Find(1);
+            int id = context.Sales.FirstOrDefault(x => x != null).Id;
+            var sale = await repository.Find(id);
 
             //Assert 
             Assert.IsNotNull(sale);

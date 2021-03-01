@@ -36,7 +36,11 @@ namespace ChocolateStoreClassLibrary.Repositorys
         }
         public async Task<Sale> Find(int id)
         {
-            return await context.Sales.FindAsync(id);
+            var sale = await context.Sales.FindAsync(id);
+            if (sale != null)
+                return sale;
+            else
+                throw new Exception();
         }
 
         public async Task<IEnumerable<SaleDto>> GetAll()

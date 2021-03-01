@@ -17,7 +17,7 @@ namespace ChocolateStoreWebApplication.Controllers
 
         public ItemsController()
         {
-            repo = MyContainer.provider.GetService<IItemsDBRepository>();
+            repo = MyContainer.Provider.GetService<IItemsDBRepository>();
         }
         // GET: api/<ItemsController>
         [HttpGet]

@@ -36,8 +36,13 @@ namespace ChocolateStoreClassLibrary.Repositorys
 
         public async Task<Item> Find(int id)
         {
-            var item = context.Items.FindAsync(id);
-            return await item;
+            var item = await context.Items.FindAsync(id);
+            if (item != null)
+            {
+                return item;
+            }
+            else throw new Exception();
+
         }
 
         public async Task Update(Item item, int id)
