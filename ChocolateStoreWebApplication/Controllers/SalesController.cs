@@ -28,27 +28,45 @@ namespace ChocolateStoreWebApplication.Controllers
 
         // GET api/<SalesController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public Sale Get(int id)
         {
-            return "value";
+            return repo.Find(id);
         }
 
         // POST api/<SalesController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public string Post(Sale sale)
         {
+            try
+            {
+                repo.Add(sale);
+                return "Продажа успешно добавлена";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
 
-        // PUT api/<SalesController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
+        //// PUT api/<SalesController>/5
+        //[HttpPut("{id}")]
+        //public void Put(int id, [FromBody] string value)
+        //{
+        //}
 
         // DELETE api/<SalesController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public string Delete(int id)
         {
+            try
+            {
+                repo.Delete(id);
+                return "Продажа успешно удалена";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
     }
 }
