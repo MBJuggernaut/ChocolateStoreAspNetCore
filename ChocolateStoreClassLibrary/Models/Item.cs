@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace ChocolateStoreConsoleApp.Models
+namespace ChocolateStoreClassLibrary.Models
 {
     public class Item
     {

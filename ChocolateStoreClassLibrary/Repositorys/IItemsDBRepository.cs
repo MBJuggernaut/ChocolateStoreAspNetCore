@@ -1,6 +1,6 @@
-﻿using ChocolateStoreConsoleApp.Models;
+﻿using ChocolateStoreClassLibrary.Models;
 
-namespace ChocolateStoreConsoleApp.Repositorys
+namespace ChocolateStoreClassLibrary.Repositorys
 {
     public interface IItemsDBRepository
     {

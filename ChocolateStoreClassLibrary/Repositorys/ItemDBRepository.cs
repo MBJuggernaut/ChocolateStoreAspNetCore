@@ -1,12 +1,12 @@
-﻿using ChocolateStoreConsoleApp.Models;
+﻿using ChocolateStoreClassLibrary.Models;
 using System;
 using System.Linq;
 
-namespace ChocolateStoreConsoleApp.Repositorys
+namespace ChocolateStoreClassLibrary.Repositorys
 {
     public class ItemDBRepository : IItemsDBRepository
     {
-        private SalesContext context;
+        private readonly SalesContext context;
         public ItemDBRepository(SalesContext context)
         {
             this.context = context;

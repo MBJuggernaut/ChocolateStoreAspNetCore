@@ -1,6 +1,6 @@
 ﻿using System.Data.Entity;
 
-namespace ChocolateStoreConsoleApp.Models
+namespace ChocolateStoreClassLibrary.Models
 {
     public class SalesContext : DbContext
     {

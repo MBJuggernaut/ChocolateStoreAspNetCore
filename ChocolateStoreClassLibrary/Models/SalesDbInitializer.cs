@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 
-namespace ChocolateStoreConsoleApp.Models
+namespace ChocolateStoreClassLibrary.Models
 {
     public class SalesDbInitializer : CreateDatabaseIfNotExists<SalesContext>
     {

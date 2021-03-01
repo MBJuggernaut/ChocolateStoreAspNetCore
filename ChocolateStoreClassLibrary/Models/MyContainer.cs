@@ -1,8 +1,8 @@
-﻿using ChocolateStoreConsoleApp.Repositorys;
+﻿using ChocolateStoreClassLibrary.Repositorys;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
-namespace ChocolateStoreConsoleApp.Models
+namespace ChocolateStoreClassLibrary.Models
 {
     public static class MyContainer
     {
