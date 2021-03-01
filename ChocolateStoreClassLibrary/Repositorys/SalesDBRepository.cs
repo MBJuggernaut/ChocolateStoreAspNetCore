@@ -1,7 +1,9 @@
 ﻿using ChocolateStoreClassLibrary.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace ChocolateStoreClassLibrary.Repositorys
 {
@@ -13,32 +15,33 @@ namespace ChocolateStoreClassLibrary.Repositorys
             this.context = context;
         }
 
-        public void Add(Sale sale)
+        public async Task Add(Sale sale)
         {
             if (IsValid(sale))
             {
                 context.Sales.Add(sale);
-                context.SaveChanges();
+                await context.SaveChangesAsync();
             }
-            else throw new Exception("Not valid data");
+            else throw new Exception();
         }
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            var saletoDelete = Find(id);
+            var saletoDelete = await Find(id);
             if (saletoDelete != null)
             {
                 context.Sales.Remove(saletoDelete);
                 context.SaveChanges();
             }
+            else throw new Exception();
         }
-        public Sale Find(int id)
+        public async Task<Sale> Find(int id)
         {
-            return context.Sales.FirstOrDefault(t => t.Id == id);
+            return await context.Sales.FindAsync(id);
         }
 
-        public IEnumerable<SaleDto> GetAll()
+        public async Task<IEnumerable<SaleDto>> GetAll()
         {
-            var allSales = context.Sales.ToList();
+            var allSales = await context.Sales.ToListAsync();
 
             var allSalesAsDto = new List<SaleDto>();
             foreach (var sale in allSales)

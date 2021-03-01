@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -21,30 +22,37 @@ namespace ChocolateStoreWebApplication.Controllers
         }
         // GET: api/<SalesController>
         [HttpGet]
-        public IEnumerable<SaleDto> Get()
+        public async Task<IEnumerable<SaleDto>> Get()
         {
-            return repo.GetAll();
+            return await repo.GetAll();
         }
 
         // GET api/<SalesController>/5
         [HttpGet("{id}")]
-        public Sale Get(int id)
+        public async Task<ActionResult<Sale>> Get(int id)
         {
-            return repo.Find(id);
+            var sale = await repo.Find(id);
+
+            if (sale == null)
+            {
+                return NotFound();
+            }
+
+            return sale;
         }
 
         // POST api/<SalesController>
         [HttpPost]
-        public string Post(Sale sale)
+        public async Task<IActionResult> Post(Sale sale)
         {
             try
             {
-                repo.Add(sale);
-                return "Продажа успешно добавлена";
+                await repo.Add(sale);
+                return NoContent();
             }
-            catch (Exception ex)
+            catch
             {
-                return ex.Message;
+                return NotFound();
             }
         }
 
@@ -56,16 +64,16 @@ namespace ChocolateStoreWebApplication.Controllers
 
         // DELETE api/<SalesController>/5
         [HttpDelete("{id}")]
-        public string Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             try
             {
-                repo.Delete(id);
-                return "Продажа успешно удалена";
+                await repo.Delete(id);
+                return NoContent();
             }
-            catch (Exception ex)
+            catch
             {
-                return ex.Message;
+                return NotFound();
             }
         }
     }

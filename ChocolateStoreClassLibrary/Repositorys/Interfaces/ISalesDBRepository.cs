@@ -1,13 +1,14 @@
 ﻿using ChocolateStoreClassLibrary.Models;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace ChocolateStoreClassLibrary.Repositorys
 {
     public interface ISalesDBRepository
     {
-        IEnumerable<SaleDto> GetAll();
-        void Add(Sale sale);
-        Sale Find(int id);        
-        void Delete(int id);
+        Task<IEnumerable<SaleDto>> GetAll();
+        Task Add(Sale sale);
+        Task<Sale> Find(int id);        
+        Task Delete(int id);
     }
 }
