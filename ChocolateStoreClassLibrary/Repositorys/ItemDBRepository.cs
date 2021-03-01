@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace ChocolateStoreClassLibrary.Repositorys
@@ -14,19 +13,19 @@ namespace ChocolateStoreClassLibrary.Repositorys
         {
             this.context = context;
         }
-        public void Add(Item item)
+        public async Task Add(Item item)
         {
             if (IsValid(item))
             {
                 context.Items.Add(item);
-                context.SaveChanges();
+                await context.SaveChangesAsync();
             }
             else throw new Exception("Not valid data");
         }
 
-        public void Delete(int id)
+        public async Task Delete(int id)
         {
-            var itemtoDelete = Find(id);
+            var itemtoDelete = await Find(id);
             if (itemtoDelete != null)
             {
                 context.Items.Remove(itemtoDelete);
@@ -35,23 +34,24 @@ namespace ChocolateStoreClassLibrary.Repositorys
             else throw new Exception("Not valid data");
         }
 
-        public Item Find(int id)
+        public async Task<Item> Find(int id)
         {
-            return context.Items.FirstOrDefault(t => t.Id == id);
+            var item = context.Items.FindAsync(id);
+            return await item;
         }
 
-        public void Update(Item item, int id)
+        public async Task Update(Item item, int id)
         {
             if (IsValid(item))
             {
-                var itemToUpdate = Find(id);
+                var itemToUpdate = await Find(id);
                 if (itemToUpdate != null)
                 {
                     itemToUpdate.Name = item.Name;
                     itemToUpdate.Price = item.Price;
                     itemToUpdate.Sales = item.Sales;
 
-                    context.SaveChanges();
+                    await context.SaveChangesAsync();
                 }
             }
             else throw new Exception("Not valid data");

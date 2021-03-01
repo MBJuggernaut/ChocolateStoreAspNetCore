@@ -2,7 +2,6 @@
 using ChocolateStoreClassLibrary.Repositorys;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -29,53 +28,60 @@ namespace ChocolateStoreWebApplication.Controllers
 
         // GET api/<ItemsController>/5
         [HttpGet("{id}")]
-        public Item Get(int id)
-        {
-            return repo.Find(id);
+        public async Task<ActionResult<Item>> Get(int id)
+        {          
+            var item = await repo.Find(id);
+
+            if (item == null)
+            {
+                return NotFound();
+            }
+
+            return item;
         }
 
         // POST api/<ItemsController>
         [HttpPost]
-        public string Post(Item item)
+        public async Task<IActionResult> Post(Item item)
         {
             try
             {
-                repo.Add(item);
-                return "Товар успешно добавлен";
+                await repo.Add(item);
+                return NoContent();
             }
-            catch (Exception ex)
+            catch
             {
-                return ex.Message;
+                return NotFound();
             }
         }
 
         // PUT api/<ItemsController>/5
         [HttpPut("{id}")]
-        public string Put(int id, Item item)
+        public async Task<IActionResult> Put(int id, Item item)
         {
             try
             {
-                repo.Update(item, id);
-                return "Товар успешно обновлен";
+                await repo.Update(item, id);
+                return NoContent();
             }
-            catch (Exception ex)
+            catch
             {
-                return ex.Message;
+                return NotFound();
             }
         }
 
         // DELETE api/<ItemsController>/5
         [HttpDelete("{id}")]
-        public string Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
             try
             {
-                repo.Delete(id);
-                return "Товар успешно обновлен";
+                await repo.Delete(id);
+                return NoContent();
             }
-            catch (Exception ex)
+            catch
             {
-                return ex.Message;
+                return NotFound();
             }
         }
     }

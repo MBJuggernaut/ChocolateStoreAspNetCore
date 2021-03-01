@@ -7,9 +7,9 @@ namespace ChocolateStoreClassLibrary.Repositorys
     public interface IItemsDBRepository
     {
         Task<IEnumerable<ItemDto>> GetAll();
-        void Add(Item item);
-        Item Find(int id);
-        void Update(Item item, int id);
-        void Delete(int id);
+        Task Add(Item item);
+        Task<Item> Find(int id);
+        Task Update(Item item, int id);
+        Task Delete(int id);
     }
 }
