@@ -30,6 +30,7 @@ namespace ChocolateStoreClassLibrary.Repositorys
                 context.Items.Remove(itemtoDelete);
                 context.SaveChanges();
             }
+            else throw new Exception("Not valid data");
         }
 
         public Item Find(int id)
@@ -54,16 +55,16 @@ namespace ChocolateStoreClassLibrary.Repositorys
             else throw new Exception("Not valid data");
         }
 
-        public IEnumerable<ItemDto> GetAll()
+        public IEnumerable<ItemDto> GetAll() //мне не нравится избыточность, надо заставить Linq работать
         {
-            var x = context.Items.ToList();
+            var allItems = context.Items.ToList();
 
-            var y = new List<ItemDto>();
-            foreach (var item in x)
+            var allItemsAsDto = new List<ItemDto>();
+            foreach (var item in allItems)
             {
-                y.Add((ItemDto)item);
+                allItemsAsDto.Add((ItemDto)item);
             }
-            return y;
+            return allItemsAsDto;
         }
 
         private bool IsValid(Item item)

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace ChocolateStoreClassLibrary.Models
+﻿namespace ChocolateStoreClassLibrary.Models
 {
     public class ItemDto
     {

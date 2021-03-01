@@ -2,6 +2,7 @@
 using ChocolateStoreClassLibrary.Repositorys;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -28,27 +29,54 @@ namespace ChocolateStoreWebApplication.Controllers
 
         // GET api/<ItemsController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public Item Get(int id)
         {
-            return "value";
+            return repo.Find(id);
         }
 
         // POST api/<ItemsController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public string Post(Item item)
         {
+            try
+            {
+                repo.Add(item);
+                return "Товар успешно добавлен";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
 
         // PUT api/<ItemsController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public string Put(int id, Item item)
         {
+            try
+            {
+                repo.Update(item, id);
+                return "Товар успешно обновлен";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
 
         // DELETE api/<ItemsController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public string Delete(int id)
         {
+            try
+            {
+                repo.Delete(id);
+                return "Товар успешно обновлен";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
     }
 }
