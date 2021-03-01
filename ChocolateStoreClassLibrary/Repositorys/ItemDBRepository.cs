@@ -1,7 +1,9 @@
 ﻿using ChocolateStoreClassLibrary.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace ChocolateStoreClassLibrary.Repositorys
 {
@@ -55,9 +57,9 @@ namespace ChocolateStoreClassLibrary.Repositorys
             else throw new Exception("Not valid data");
         }
 
-        public IEnumerable<ItemDto> GetAll() //мне не нравится избыточность, надо заставить Linq работать
+        public async Task<IEnumerable<ItemDto>> GetAll() //мне не нравится избыточность, надо заставить Linq работать
         {
-            var allItems = context.Items.ToList();
+            var allItems = await context.Items.ToListAsync();
 
             var allItemsAsDto = new List<ItemDto>();
             foreach (var item in allItems)
