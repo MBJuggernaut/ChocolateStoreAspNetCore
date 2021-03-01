@@ -54,9 +54,16 @@ namespace ChocolateStoreClassLibrary.Repositorys
             else throw new Exception("Not valid data");
         }
 
-        public List<ItemDto> GetAll()
+        public IEnumerable<ItemDto> GetAll()
         {
-            return context.Items.Select(i => (ItemDto)i).ToList();
+            var x = context.Items.ToList();
+
+            var y = new List<ItemDto>();
+            foreach (var item in x)
+            {
+                y.Add((ItemDto)item);
+            }
+            return y;
         }
 
         private bool IsValid(Item item)

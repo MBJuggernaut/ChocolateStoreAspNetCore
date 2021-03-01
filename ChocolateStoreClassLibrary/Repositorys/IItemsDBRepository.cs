@@ -5,7 +5,7 @@ namespace ChocolateStoreClassLibrary.Repositorys
 {
     public interface IItemsDBRepository
     {
-        List<ItemDto> GetAll();
+        IEnumerable<ItemDto> GetAll();
         void Add(Item item);
         Item Find(int id);
         void Update(Item item, int id);

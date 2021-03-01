@@ -1,9 +1,9 @@
-﻿using NUnit.Framework;
+﻿using ChocolateStoreClassLibrary.Models;
+using ChocolateStoreClassLibrary.Repositorys;
 using Microsoft.Extensions.DependencyInjection;
-using System.Transactions;
+using NUnit.Framework;
 using System.Linq;
-using ChocolateStoreConsoleApp.Repositorys;
-using ChocolateStoreConsoleApp.Models;
+using System.Transactions;
 
 namespace ChocolateStoreNUnitTestProject
 {
@@ -11,13 +11,13 @@ namespace ChocolateStoreNUnitTestProject
     {
         private TransactionScope transactionScope;
         private IItemsDBRepository repository;
-        private SalesContext context;
+        private StoreContext context;
         [SetUp]
         public void Setup()
         {
             MyContainer.Initialize();
             repository = MyContainer.provider.GetService<IItemsDBRepository>();
-            context = MyContainer.provider.GetService<SalesContext>();
+            context = MyContainer.provider.GetService<StoreContext>();
 
             transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
         }

@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
+﻿using ChocolateStoreClassLibrary.Models;
+using ChocolateStoreClassLibrary.Repositorys;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -12,11 +13,17 @@ namespace ChocolateStoreWebApplication.Controllers
     [ApiController]
     public class ItemsController : ControllerBase
     {
+        private readonly IItemsDBRepository repo;
+
+        public ItemsController()
+        {
+            repo = MyContainer.provider.GetService<IItemsDBRepository>();
+        }
         // GET: api/<ItemsController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<ItemDto> Get()
         {
-            return new string[] { "value1", "value2" };
+            return repo.GetAll();
         }
 
         // GET api/<ItemsController>/5

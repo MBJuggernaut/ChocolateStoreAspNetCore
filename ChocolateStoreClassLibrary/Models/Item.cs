@@ -15,12 +15,22 @@ namespace ChocolateStoreClassLibrary.Models
         [Required]
         [Range(0, int.MaxValue, ErrorMessage = "Value for {0} must be between {1} and {2}.")]
         public int Price { get; set; }
-        
+
         public virtual List<Sale> Sales { get; set; }
 
         public Item()
         {
             Sales = new List<Sale>();
+        }
+
+        public static explicit operator ItemDto(Item item)
+        {
+            return new ItemDto
+            {
+                Id = item.Id,
+                Name = item.Name,
+                Price = item.Price                
+            };
         }
     }
 }
