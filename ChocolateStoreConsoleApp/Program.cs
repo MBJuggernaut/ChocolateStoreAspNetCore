@@ -1,31 +1,24 @@
-﻿using System.Net.Http;
-using System;
-using System.Threading.Tasks;
-using ChocolateStoreClassLibrary.Models;
-using System.Net.Http.Headers;
+﻿using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Hosting;
 
 namespace ChocolateStoreConsoleApp
 {
     class Program
     {
-        private static HttpClient client = new HttpClient();
-        static void Main()
+        public static void Main(string[] args)
         {
-            Get().Wait();
+            CreateHostBuilder(args).Build().Run();
         }
 
-        public static async Task Get()
-        {
-            client.DefaultRequestHeaders.Accept.Clear();
-            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
-
-            HttpResponseMessage response = await client.GetAsync("https://localhost:44395/api/Items");
-            if (response.IsSuccessStatusCode)
-            {
-                var sites = await response.Content.ReadAsStringAsync();
-            }
-
-            Console.WriteLine();
-        }
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder =>
+                {
+                    webBuilder.UseStartup<Startup>();
+                });
     }
 }
+
+
