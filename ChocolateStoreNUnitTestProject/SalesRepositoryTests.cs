@@ -1,6 +1,5 @@
 using ChocolateStoreClassLibrary.Models;
 using ChocolateStoreClassLibrary.Repositorys;
-using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,9 +16,8 @@ namespace ChocolateStoreNUnitTestProject
         [SetUp]
         public void Setup()
         {
-            MyContainer.Initialize();
-            repository = MyContainer.Provider.GetService<ISalesDBRepository>();
-            context = MyContainer.Provider.GetService<StoreContext>();
+            context = new StoreContext();
+            repository = new SalesDBRepository(context);
 
             transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
         }

@@ -1,6 +1,5 @@
 ﻿using ChocolateStoreClassLibrary.Models;
 using ChocolateStoreClassLibrary.Repositorys;
-using Microsoft.Extensions.DependencyInjection;
 using NUnit.Framework;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,10 +15,8 @@ namespace ChocolateStoreNUnitTestProject
         [SetUp]
         public void Setup()
         {
-            MyContainer.Initialize();
-            repository = MyContainer.Provider.GetService<IItemsDBRepository>();
-            context = MyContainer.Provider.GetService<StoreContext>();
-
+            context = new StoreContext();
+            repository = new ItemDBRepository(context);
             transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled);
         }
 
@@ -92,7 +89,7 @@ namespace ChocolateStoreNUnitTestProject
             }
             catch
             {
-                failed = true;   
+                failed = true;
             }
             //Assert 
             Assert.IsTrue(failed);
@@ -101,7 +98,7 @@ namespace ChocolateStoreNUnitTestProject
         [Test]
         public async Task Find()
         {
-            int id = context.Items.FirstOrDefault(x=>x!=null).Id;
+            int id = context.Items.FirstOrDefault(x => x != null).Id;
             var sale = await repository.Find(id);
 
             //Assert 

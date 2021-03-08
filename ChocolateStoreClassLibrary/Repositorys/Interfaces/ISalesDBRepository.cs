@@ -10,5 +10,6 @@ namespace ChocolateStoreClassLibrary.Repositorys
         Task Add(Sale sale);
         Task<Sale> Find(int id);        
         Task Delete(int id);
+        Task<int> GetReport();
     }
 }

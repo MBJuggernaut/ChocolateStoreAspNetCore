@@ -55,6 +55,21 @@ namespace ChocolateStoreClassLibrary.Repositorys
             return allSalesAsDto;
         }
 
+        public async Task<int> GetReport()
+        {
+            var today = DateTime.Now.ToString("MM.yyyy");
+            var allSales = await context.Sales.ToListAsync();
+            int count = 0;
+            foreach (var sale in allSales)
+            {
+                if (sale.SaleDate.ToString("MM.yyyy") == today)
+                {
+                    count++;
+                }
+            }
+            return count;
+        }
+
         private bool IsValid(Sale sale)
         {
             return sale != null && sale.Items.Count > 0 && MyValidator.Validate(sale).Count == 0;
