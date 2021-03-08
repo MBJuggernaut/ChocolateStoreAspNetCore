@@ -54,12 +54,6 @@ namespace ChocolateStoreWebApplication.Controllers
             }
         }
 
-        //// PUT api/<SalesController>/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody] string value)
-        //{
-        //}
-
         // DELETE api/<SalesController>/5
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)
