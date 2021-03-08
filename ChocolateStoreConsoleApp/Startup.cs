@@ -1,4 +1,5 @@
 ﻿using ChocolateStoreClassLibrary.Models;
+using ChocolateStoreClassLibrary.Repositorys;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -20,7 +21,9 @@ namespace ChocolateStoreConsoleApp
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            MyContainer.Initialize();
+            services.AddSingleton<StoreContext>();
+            services.AddSingleton<IItemsDBRepository, ItemDBRepository>();
+            services.AddSingleton<ISalesDBRepository, SalesDBRepository>();
 
             services.AddControllers().AddNewtonsoftJson(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
             services.AddSwaggerGen(c =>

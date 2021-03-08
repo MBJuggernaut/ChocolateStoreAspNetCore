@@ -1,7 +1,6 @@
 ﻿using ChocolateStoreClassLibrary.Models;
 using ChocolateStoreClassLibrary.Repositorys;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.DependencyInjection;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
@@ -15,9 +14,9 @@ namespace ChocolateStoreWebApplication.Controllers
     {
         private readonly ISalesDBRepository repo;
 
-        public SalesController()
+        public SalesController(ISalesDBRepository repo)
         {
-            repo = MyContainer.Provider.GetService<ISalesDBRepository>();
+            this.repo = repo;
         }
         // GET: api/<SalesController>
         [HttpGet]
